@@ -20,6 +20,6 @@ class GuestLoginController extends Controller
 
         Auth::login($guestUser);
 
-        return redirect('/guestdashboard');
+        return redirect('/dashboard');
     }
 }

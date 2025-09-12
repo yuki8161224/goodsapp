@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestLoginController;
 use App\Http\Controllers\GoodsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,9 +15,13 @@ Route::get('/login/guest', [GuestLoginController::class, 'login'])->name('guest.
 
 // 認証が必要な全てのルートをグループ化
 Route::middleware(['auth', 'verified'])->group(function () {
-    // 全ユーザーがアクセスできるページ
+    // ユーザーの役割に基づいてアクセス先を振り分け
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        if (Auth::user()->role === 'admin') {
+            return view('dashboard');
+        } elseif (Auth::user()->role === 'user') {
+            return view('guestdashboard');
+        }
     })->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

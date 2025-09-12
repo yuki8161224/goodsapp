@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Guest_Dashboard') }}
+            {{ __('Guest Dashboard') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+                    <h3 class="text-lg font-medium">ゲストとしてログインしました！</h3>
+                    <p class="mt-4">
+                        ここでは、お客さんとして利用できるサービスや情報が表示されます。
+                        <br>
+                        パスワードは必要ありませんので、自由にページを閲覧してください。
+                    </p>
                 </div>
             </div>
         </div>
