@@ -12,7 +12,8 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        //
+        $goods = Goods::with('user')->get();
+        return view('goods.index', compact('goods'));
     }
 
     /**
@@ -20,7 +21,7 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
+        return view('goods.create');
     }
 
     /**
@@ -28,8 +29,21 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'goods_name' => 'required|string|max:100',
+            'price'      => 'required|integer|min:0',
+            'image_path' => 'required|image|max:10240',
+        ]);
+
+        $data = $request->only(['goods_name', 'price']);
+        $data['image_path'] = $request->file('image_path')->store('goods_images', 'public');
+
+        $item = $request->user()->goods()->create($data);
+        return redirect()->route('goods.index')->with('success', 'Goods created successfully.');
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -58,8 +72,12 @@ class GoodsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Goods $goods)
+    public function destroy(Goods $good)
     {
-        //
+        $good->forceDelete();
+
+
+        return redirect()
+            ->route('goods.index');
     }
 }
