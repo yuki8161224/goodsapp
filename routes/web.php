@@ -32,6 +32,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::resource('goods', GoodsController::class);
     });
+    Route::get('/goods', function () {
+        if (Auth::user()->role === 'admin') {
+            return view('goods');
+        } elseif (Auth::user()->role === 'user') {
+            return view('guestgoods');
+        }
+    })->name('goods.index');
 });
 
 require __DIR__ . '/auth.php';

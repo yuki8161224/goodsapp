@@ -89,6 +89,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Guest Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('goods.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Guest Goods') }}
+            </x-responsive-nav-link>
         </div>
         @endif
 
