@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Goods;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestLoginController;
 use App\Http\Controllers\GoodsController;
+use App\Http\Controllers\GuestGoodsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,16 +31,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // 管理ユーザー専用のルート
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('goods', GoodsController::class);
     });
-    Route::get('/goods', function () {
-        if (Auth::user()->role === 'admin') {
-            return view('goods');
-        } elseif (Auth::user()->role === 'user') {
-            return view('guestgoods');
-        }
-    })->name('goods.index');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/goods', [GuestGoodsController::class, 'index'])->name('goods.index');
+        // 他のユーザー向けのルートを追加
+    });
 });
 
 require __DIR__ . '/auth.php';
