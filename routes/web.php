@@ -30,10 +30,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // 管理ユーザー専用のルート
+    // 管理ユーザー専用のルート (/admin/goods 以下に設定)
     Route::middleware(['auth', 'admin'])->group(function () {
-        Route::resource('goods', GoodsController::class);
+        Route::resource('admin/goods', GoodsController::class)->names('goods');
     });
+
+    // 一般ユーザー専用のルート (/goods 以下に設定)
     Route::middleware(['auth'])->group(function () {
         Route::get('/goods', [GuestGoodsController::class, 'index'])->name('guestgoods.index');
     });
