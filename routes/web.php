@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Goods;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestLoginController;
 use App\Http\Controllers\GoodsController;
@@ -35,8 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('goods', GoodsController::class);
     });
     Route::middleware(['auth'])->group(function () {
-        Route::get('/goods', [GuestGoodsController::class, 'index'])->name('goods.index');
-        // 他のユーザー向けのルートを追加
+        Route::get('/goods', [GuestGoodsController::class, 'index'])->name('guestgoods.index');
     });
 });
 
