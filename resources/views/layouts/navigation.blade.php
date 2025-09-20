@@ -16,7 +16,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('goods')" :active="request()->routeIs('goods')">
+                    <x-nav-link :href="route('goods.index')" :active="request()->routeIs('goods.index')">
                         {{ __('Goods') }}
                     </x-nav-link>
                     @elseif (Auth::user()->role === 'user')
@@ -83,7 +83,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('goods')" :active="request()->routeIs('goods')">
+            <x-responsive-nav-link :href="route('goods.index')" :active="request()->routeIs('goods.index')">
                 {{ __('Goods') }}
             </x-responsive-nav-link>
         </div>
