@@ -6,6 +6,7 @@
     </x-slot>
 
     <div class="goods_bg">
+        <div id="add_modal" class="total_modal">300</div>
         <ul class="goods_wrapper">
             @foreach($goods as $item)
             <li class="goods_contents" x-data="{ quantity: 0 }">
@@ -34,6 +35,12 @@
             </li>
             @endforeach
         </ul>
-        <a href="" class="total-submit">注文票を表示する</a>
+        <button id="total-submit">注文票を表示する</button>
     </div>
+    <script>
+        const totalBtn = document.getElementById('total-submit');
+        totalBtn.addEventListener('click', () => {
+
+        })
+    </script>
 </x-app-layout>
