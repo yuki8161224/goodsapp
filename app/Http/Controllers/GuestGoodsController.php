@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Goods;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class GuestGoodsController extends Controller
 {
     public function index()
     {
-        $goods = Goods::with('user')->get();
-        return view('guestgoods.index', compact('goods'));
+        return view('guestgoods.index');
+    }
+
+
+    public function apiIndex(): JsonResponse
+    {
+        $goods = Goods::all();
+        return response()->json($goods);
     }
     /**
      * Show the form for creating a new resource.

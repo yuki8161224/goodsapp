@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('admin/goods', GoodsController::class)->names('goods');
     });
+    Route::get('/api/goods', [GuestGoodsController::class, 'apiIndex']);
 
     // 一般ユーザー専用のルート (/goods 以下に設定)
     Route::middleware(['auth'])->group(function () {
