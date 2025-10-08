@@ -38,12 +38,12 @@ console.log("GoodsList component loaded");
 import { computed, onMounted, ref } from 'vue';
 import axios from 'axios';
 
-const app = createApp({});
-app.component('goods-list', GoodsList); // ← コンポーネント登録
-app.mount('#app'); 
+
 
 export default {
+  
   setup() {
+    console.log("GoodsList component defined");
     const goods = ref([]);
     const showModal = ref(false);
 

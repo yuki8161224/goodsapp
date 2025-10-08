@@ -10,4 +10,14 @@ export default defineConfig({
         }),
         vue(),
     ],
+    // ★★★ ここから追加 ★★★
+    server: {
+        host: '0.0.0.0', // 外部からの接続を許可
+        hmr: {
+            host: 'localhost', // ブラウザが接続するホスト名
+            port: 5174, // docker-compose.ymlでホストにマッピングされているポート (5174:5173 を想定)
+        },
+        port: 5173, // コンテナ内のViteのポート
+    }
+    // ★★★ ここまで追加 ★★★
 });
