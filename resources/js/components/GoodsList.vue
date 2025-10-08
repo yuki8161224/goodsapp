@@ -34,8 +34,13 @@
 </template>
 
 <script>
+console.log("GoodsList component loaded");
 import { computed, onMounted, ref } from 'vue';
 import axios from 'axios';
+
+const app = createApp({});
+app.component('goods-list', GoodsList); // ← コンポーネント登録
+app.mount('#app'); 
 
 export default {
   setup() {
@@ -72,13 +77,13 @@ export default {
     };
 
     const fetchGoods = async () => {
-      try {
-        const response = await axios.get('/api/goods'); // APIルートを作成
-        goods.value = response.data.map(item => ({ ...item, quantity: 0 }));
-      } catch (error) {
-        console.error("Error fetching goods:", error);
-      }
-    };
+  try {
+    const response = await axios.get('/api/goods'); // This API call is the key
+    goods.value = response.data.map(item => ({ ...item, quantity: 0 }));
+  } catch (error) {
+    console.error("Error fetching goods:", error);
+  }
+};
 
     onMounted(() => {
       fetchGoods();
