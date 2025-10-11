@@ -14,7 +14,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css','resources/css/style.css', 'resources/js/app.js'])
-    @vite(['resources/js/app.js'])
+
 
 
 </head>
